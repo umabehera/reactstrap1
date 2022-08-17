@@ -18,7 +18,7 @@ function Dashboard(){
         .then(response => response.json())
         .then(json => setData(json))
         }, []);
-        await timeout(1000);
+        timeout(1000);
         // console.log(data);
     return(
         <>
