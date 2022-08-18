@@ -9,7 +9,7 @@ import { Component } from 'react';
 
 
 function RegisterModal() {
-    const [email,setEmail] = useState();
+    const [email,setEmail] = useState('');
     const [password,setpassWord] = useState('');
     const [modal,setModal] = useState(false);
     const [uniqueEmail,setuniqueEmail] = useState(true);
@@ -22,53 +22,53 @@ function RegisterModal() {
         setModal(!modal);
       }
       function validateEmail(){
-      const emailRex =
-      /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-      let myList = JSON.parse(localStorage.getItem("users", "[]")) || [];
-      // console.log(myList);
-      const found = false;
-      // console.log(found);
-      // if (searchIndex == -1)
-      //       setuniqueEmail(true);
-
       
-    
-    
-        
-        if (!emailRex.test(email)) {
-        setErrors('Email is invalid');
-        return;
-        }
-       
-
-        else if(email.length<1){
-        setErrors('Enter an email');
-        return;
-        }
-         else {
-        setErrors(null);
-
-        }
       }
       function validatePassword(e){
         // console.log(confirmPassword);
-        if(password.length <1){
-        setpasserrors('Enter a password');
-        return;}
-        else if(password !== confirmPassword){
-        setpasserrors('Confirm Password does not match');
-        return;
-        }
-        else
-        setpasserrors(null);
+        
         
       }
       function register(e){
         e.preventDefault();
         // console.log('sss');
-        validatePassword();
-        validateEmail();
-        let myList = JSON.parse(localStorage.getItem("users", "[]")) || [];
+        if(password.length <1){
+          setpasserrors('Enter a password');
+          return;}
+          else if(password !== confirmPassword){
+          setpasserrors('Confirm Password does not match');
+          return;
+          }
+          else
+          setpasserrors(null);
+          const emailRex =
+          /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+          var myList = JSON.parse(localStorage.getItem("users", "[]")) || [];
+          // console.log(myList);
+          const found = false;
+          // console.log(found);
+          // if (searchIndex == -1)
+          //       setuniqueEmail(true);
+    
+          
+        
+        
+            
+            if (!emailRex.test(email)) {
+            setErrors('Email is invalid');
+            return;
+            }
+           
+    
+            else if(email.length<1){
+            setErrors('Enter an email');
+            return;
+            }
+             else {
+            setErrors(null);
+    
+            }
+        var myList = JSON.parse(localStorage.getItem("users", "[]")) || [];
         const searchIndex = myList.findIndex((user) => user.email==email);
         if(searchIndex != -1){
           setErrors('Email exists');
@@ -81,9 +81,9 @@ function RegisterModal() {
             myList.push(newUser);
             localStorage.setItem("users", JSON.stringify(myList));
             console.log('register');
-            setEmail();
-            setpassWord();
-            setconfirmPassWord();
+            setEmail('');
+            setpassWord('');
+            setconfirmPassWord('');
             toggle();
           }
           else
