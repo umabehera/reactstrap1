@@ -6,6 +6,7 @@ import { Component } from 'react';
 import { Card, CardTitle, CardText, Row, Col } from 'reactstrap';
 import DetailsPage from './DetailsPage';
 import EditDetails from './EditDetails';
+import DeleteUser from './Delete';
 
 
 
@@ -40,23 +41,32 @@ function Dashboard() {
     //     return new Promise( res => setTimeout(res, delay) );
     // }
     const fetchData = () => {
+        var myList = JSON.parse(localStorage.getItem("apidata", "[]")) || [];
+        if (myList.length <= 0) {
         fetch('https://jsonplaceholder.typicode.com/users')
             .then(response => response.json())
             .then(json => {
                 setData(json);
-                console.log(json);
+                // console.log(json);
+            localStorage.setItem("apidata", JSON.stringify(json));
+
             })
+        }
+        else{
+            setData(myList);
+        }
 
     };
+    // console.log(editdata);
     function toggledetails() {
         setModal(!modal);
     }
     function savechanges(e) {
         e.preventDefault();
         data[0].username = 'uma';
-        console.log(data);
+        // console.log(data);
         setData(data);
-        console.log('hi');
+        // console.log('hi');
     }
     useEffect(() => {
         fetchData();
@@ -66,7 +76,6 @@ function Dashboard() {
     // console.log(data);
     return (
         <>
-
             <div className='dashboard'>
                 <h1 style={{ color: 'blue' }}>Welcome to the Dashboard Page</h1>
                 <Row>
@@ -75,14 +84,16 @@ function Dashboard() {
                             <Col sm="4">
                                 <Card body style={{ marginBottom: '20px' }}>
                                     <CardTitle>User_Name: {item.username}</CardTitle>
-                                    <CardText>Full_Name: {item.name}User_Email: {item.email}</CardText>
+                                    <CardText>Full_Name: {item.name}<br/> User_Email: {item.email}</CardText>
                                     <DetailsPage username={item.username} email={item.email}
                                         address={item.address}
                                         company={item.company}
                                         website={item.website}
                                         phone={item.phone}
                                     />
-                                    <EditDetails user={item}/>
+                                    <EditDetails editdata={editdata} user={item} setEditData={setEditData} setData={setData} />
+                                    <DeleteUser id={item.id} setData={setData} />
+
 
                                 </Card>
                             </Col>
