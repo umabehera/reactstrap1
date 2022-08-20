@@ -6,6 +6,7 @@ import React, { useState, useEffect } from 'react';
 import { Component } from 'react';
 
 function EditDetails(props) {
+  
 
 
   // props.setEditData(myList[searchIndex]);
@@ -13,37 +14,22 @@ function EditDetails(props) {
 
   // console.log(props.editdata);
   // console.log(props.user);
-  const [modal, setModal] = useState(false);
-  function saveData(e) {
-    var myList = JSON.parse(localStorage.getItem("apidata", "[]"));
-    const searchIndex = myList.findIndex((user) => props.user.id == user.id);
-    e.preventDefault();
-    console.log(myList);
-    // const searchIndex = myList.findIndex((user) => props.user.id==user.id);
-    myList[searchIndex] = props.editdata;
-    console.log(myList);
-    localStorage.setItem("apidata", JSON.stringify(myList));
-    toggledetails();
+ 
+  
 
-
-
-  }
-  function toggledetails() {
-    setModal(!modal);
-    var myList = JSON.parse(localStorage.getItem("apidata", "[]"));
-    const searchIndex = myList.findIndex((user) => props.user.id == user.id);
-    props.setEditData(myList[searchIndex]);
-    props.setData(myList);
-
-  }
   return (
     <div>
-      <Button color="danger" onClick={toggledetails}>Edit</Button>
-      <Modal isOpen={modal} toggle={toggledetails}>
-        <ModalHeader toggle={toggledetails}>Header</ModalHeader>
+      {/* <Button color="danger" onClick={toggledetails}>Edit</Button> */}
+      <Modal isOpen={props.modal} toggle={()=>{
+        props.setModal(!props.modal)
+      }}>
+        <ModalHeader toggle={()=>{
+        props.setModal(!props.modal)
+      }}>{props.user.id?'Edit':'Create'} Details</ModalHeader>
 
         <ModalBody>
-          <Form className="form" onSubmit={(e) => saveData(e)} >
+        <div className='inputErrors'>{props.inputErrors}</div>
+          <Form className="form uma" onSubmit={(e) => props.savedata(e,props.user.id)} >
             <FormGroup>
               <Label for="exampleEmail">Name</Label>
               <Input
@@ -92,19 +78,6 @@ function EditDetails(props) {
                 }
               />
             </FormGroup>
-
-            <FormGroup>
-              <Label for="exampleEmail">Website</Label>
-              <Input
-                type="text"
-                name="username"
-                defaultValue={props.user.website}
-                onChange={(e) =>
-                  props.setEditData({ ...props.user, website: e.target.value })
-
-                }
-              />
-            </FormGroup>
             <FormGroup>
               <Label for="exampleEmail">Website</Label>
               <Input
@@ -146,7 +119,7 @@ function EditDetails(props) {
               <Input
                 type="text"
                 name="username"
-                defaultValue={props.user.company.bs}
+                defaultValue={props.user.company.catchPhrase}
                 onChange={(e) =>
                   props.setEditData({ ...props.user, company: { ...props.user.company, catchPhrase: e.target.value } })
 
@@ -231,7 +204,9 @@ function EditDetails(props) {
         </ModalBody>
         <ModalFooter>
 
-          <Button color="secondary" onClick={toggledetails}>CLose</Button>
+          <Button color="secondary" onClick={()=>{
+            props.setModal(false);
+          }}>Close</Button>
         </ModalFooter>
       </Modal>
 
