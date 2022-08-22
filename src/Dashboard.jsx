@@ -8,6 +8,7 @@ import DetailsPage from './DetailsPage';
 import EditDetails from './EditDetails';
 import DeleteUser from './Delete';
 import Swal from "sweetalert2";
+import { NavLink } from 'react-router-dom';
 
 
 
@@ -166,11 +167,12 @@ function Dashboard() {
         <>
             <div className='dashboard'>
                 <h1 style={{ color: 'white' }}>Welcome to the Dashboard Page</h1>
+                <NavLink to='/'>Logout</NavLink>
                 <Button onClick={createUser} color='secondary' style={{ margin: '20px' }} >Create User</Button>
                 <Row>
                     {
                         data.length > 0 && data.map((item, index) => (
-                            <Col sm="4">
+                            <Col sm="4" key={index}>
                                 <Card body inverse style={{ backgroundColor: '#333', borderColor: '#333', marginBottom: '20px' }}>
                                     <CardTitle>User_Name: {item.username}</CardTitle>
                                     <CardText>Full_Name: {item.name}<br /> User_Email: {item.email}</CardText>

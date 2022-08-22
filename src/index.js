@@ -4,21 +4,30 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import Dashboard from './Dashboard';
-import { BrowserRouter as Router, Switch, Routes,
-  Route, Redirect} from "react-router-dom";
+import {
+  BrowserRouter as Router, Switch, Routes,
+  Route, Redirect
+} from "react-router-dom";
+import ProtectedRoutes from './ProtectedRoutes';
+import Error from './Error';
+import Demo from './Demopage';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-  <Router>
-          <Routes>
-                <Route path='/dashboard' element={<Dashboard/>} />
-                <Route path='' element={<App/>} />
+    <Router>
+      <Routes>
+        <Route element={<ProtectedRoutes/>}>
+          <Route element={<Dashboard/>} path='/dashboard' />
+          <Route element={<Demo/>} path='/demo'/>
+        </Route>
+        <Route path='/' element={<App />} />
+        <Route path='/*' element={<Error />} />
 
-          </Routes>
+      </Routes>
 
-   
-          </Router>
+
+    </Router>
   </React.StrictMode>
 );
 
@@ -26,7 +35,7 @@ root.render(
 // to log results (for example: reportWebVitals(console.log))
 // or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
 reportWebVitals();
-// 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 
+// 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
 // asd
 
 

@@ -4,6 +4,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import {Button ,ModalFooter, Modal, ModalBody, ModalHeader,Form ,FormGroup,Label,FormFeedback,FormText,Input} from 'reactstrap';
 import React,{useState,useEffect} from 'react';
 import { Component } from 'react';
+import Swal from "sweetalert2";
 
 
 
@@ -84,6 +85,12 @@ function RegisterModal() {
             setEmail('');
             setpassWord('');
             setconfirmPassWord('');
+            Swal.fire({
+              title: 'Success',
+              text: "New User Created",
+              icon: "success",
+              confirmButtonText: "OK",
+          });
             toggle();
           }
           else
