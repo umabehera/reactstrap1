@@ -11,15 +11,22 @@ import {
 import ProtectedRoutes from './ProtectedRoutes';
 import Error from './Error';
 import Demo from './Demopage';
+import { NavLink } from 'react-router-dom';
+import Navbar1 from './Navbar1';
+import Sidebar from './SIdebar';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
+    
+
+
     <Router>
+
       <Routes>
-        <Route element={<ProtectedRoutes/>}>
-          <Route element={<Dashboard/>} path='/dashboard' />
-          <Route element={<Demo/>} path='/demo'/>
+        <Route element={<ProtectedRoutes />}>
+          <Route element={<Dashboard />} path='/dashboard' />
+          <Route element={<Demo />} path='/demo' />
         </Route>
         <Route path='/' element={<App />} />
         <Route path='/*' element={<Error />} />

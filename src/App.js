@@ -21,7 +21,7 @@ function App() {
   var [errors, setErrors] = useState('');
   var [passerrors, setpasserrors] = useState();
   let navigate = useNavigate();
-  localStorage.setItem('isloggedin', '');
+  // localStorage.setItem('isloggedin', '');
 
 
   function login() {
@@ -32,14 +32,13 @@ function App() {
         if (email == element.email && password == element.password) {
           console.log('user exist and password matches');
           localStorage.setItem('isloggedin', true);
+          localStorage.setItem('loginemail', element.email);
           navigate('/dashboard');
           return;
         }
 
       });
     }
-
-    // console.log('logged in');
   }
   function validateEmail() {
     const emailRex =

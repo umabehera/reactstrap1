@@ -167,7 +167,6 @@ function Dashboard() {
         <>
             <div className='dashboard'>
                 <h1 style={{ color: 'white' }}>Welcome to the Dashboard Page</h1>
-                <NavLink to='/'>Logout</NavLink>
                 <Button onClick={createUser} color='secondary' style={{ margin: '20px' }} >Create User</Button>
                 <Row>
                     {
